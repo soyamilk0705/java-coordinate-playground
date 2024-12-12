@@ -1,11 +1,31 @@
 package abs;
 
+import message.ErrorMessages;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AvanteTest {
+
+    @Test
+    @DisplayName("자동차 거리 입력 값 유효성 체크")
+    void validDistance(){
+        // given, when, then
+        assertDoesNotThrow(() -> new Avante(150));
+    }
+
+    @Test
+    @DisplayName("자동차 거리 입력 값 유효성 체크 시 음수 입력한 경우")
+    void validDistanceInputMinus(){
+        // given, when
+        IllegalArgumentException fail = assertThrows(IllegalArgumentException.class, () -> new Avante(-150));
+
+        // then
+        assertThat(fail.getMessage()).isEqualTo(ErrorMessages.INVALID_NEGATIVE_INPUT);
+    }
 
     @Test
     @DisplayName("자동차 이름 반환")
@@ -59,17 +79,6 @@ class AvanteTest {
         assertThat(response).isEqualTo(0);
     }
 
-    @Test
-    @DisplayName("자동차 연료량 계산 시 마이너스 입력한 경우")
-    void calculateInputMinus(){
-        // given
-        RentCar avante = new Avante(-150);
 
-        // when
-        int response = avante.calculate();
-
-        // then
-        assertThat(response).isEqualTo(-10);
-    }
 
 }

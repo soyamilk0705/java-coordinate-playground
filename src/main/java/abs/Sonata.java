@@ -1,7 +1,7 @@
 package abs;
 
 public class Sonata extends RentCar{
-    private static final int SONATA_FUEL = 10;
+    private static final int FUEL_EFFICIENCY = 10;
 
     public Sonata(int distance) {
         super(distance);
@@ -9,7 +9,7 @@ public class Sonata extends RentCar{
 
     @Override
     int getFuelEfficiency() {
-        return SONATA_FUEL;
+        return FUEL_EFFICIENCY;
     }
 
     @Override

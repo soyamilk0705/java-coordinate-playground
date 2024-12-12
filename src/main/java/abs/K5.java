@@ -1,7 +1,7 @@
 package abs;
 
 public class K5 extends RentCar {
-    private static final int K5_FUEL = 13;
+    private static final int FUEL_EFFICIENCY = 13;
 
     public K5(int distance) {
         super(distance);
@@ -9,7 +9,7 @@ public class K5 extends RentCar {
 
     @Override
     int getFuelEfficiency() {
-        return K5_FUEL;
+        return FUEL_EFFICIENCY;
     }
 
     @Override
