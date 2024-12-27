@@ -21,12 +21,12 @@ public class Point {
         );
     }
 
-    public double getX(){
-        return x.getCoordination();
+    public double minusX(Point other) {
+        return this.x.minus(other.x);
     }
 
-    public double getY(){
-        return y.getCoordination();
+    public double minusY(Point other){
+        return this.y.minus(other.y);
     }
 
     public void validateRange(){
@@ -47,4 +47,5 @@ public class Point {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
 }

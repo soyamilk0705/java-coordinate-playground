@@ -52,4 +52,30 @@ public class PointTest {
         assertThat(fail.getMessage()).isEqualTo(ErrorMessages.INVALID_RANGE_INPUT);
 
     }
+
+    @Test
+    @DisplayName("x 값 뺄셈")
+    void minusX(){
+        // given
+        Point point1 = Point.from(10, 10);
+        Point point2 = Point.from(5, 5);
+
+        // when
+        double response = point1.minusX(point2);
+
+        assertThat(response).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("y 값 뺄셈")
+    void minusY(){
+        // given
+        Point point1 = Point.from(10, 10);
+        Point point2 = Point.from(5, 5);
+
+        // when
+        double response = point1.minusY(point2);
+
+        assertThat(response).isEqualTo(5);
+    }
 }

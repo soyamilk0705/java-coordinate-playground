@@ -32,4 +32,19 @@ public class CoordinateTest {
         // then
         assertThat(response).isFalse();
     }
+
+    @Test
+    @DisplayName("coordinate 값 뺄셈")
+    void minus(){
+        // given
+        Coordinate coordinate1 = new Coordinate(10);
+        Coordinate coordinate2 = new Coordinate(5);
+
+        // when
+        double response = coordinate1.minus(coordinate2);
+
+        // then
+        assertThat(response).isEqualTo(5);
+
+    }
 }

@@ -13,12 +13,12 @@ public class Coordinate {
         this.coordination = coordination;
     }
 
-    public double getCoordination(){
-        return coordination;
-    }
-
     public boolean isCorrectRange() {
         return coordination <= MAX_COORDINATION && coordination >= MIN_COORDINATION;
+    }
+
+    public double minus(Coordinate other) {
+        return this.coordination - other.coordination;
     }
 
     @Override
@@ -33,5 +33,6 @@ public class Coordinate {
     public int hashCode() {
         return Objects.hashCode(coordination);
     }
+
 }
 

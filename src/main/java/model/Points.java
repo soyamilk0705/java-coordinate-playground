@@ -13,11 +13,11 @@ public class Points {
     }
 
     public double minusX(){
-        return point1.getX() - point2.getX();
+        return point1.minusX(point2);
     }
 
     public double minusY(){
-        return point1.getY() - point2.getY();
+        return point1.minusY(point2);
     }
 
     @Override
