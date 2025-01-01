@@ -63,6 +63,7 @@ public class PointTest {
         // when
         double response = point1.minusX(point2);
 
+        // then
         assertThat(response).isEqualTo(5);
     }
 
@@ -76,6 +77,93 @@ public class PointTest {
         // when
         double response = point1.minusY(point2);
 
+        // then
         assertThat(response).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("y 좌표 같아 좌표 그림 추가")
+    void drawPointIfMatchY(){
+        // given
+        Point point1 = Point.from(2, 1);
+        StringBuilder sb = new StringBuilder();
+
+        // when
+        point1.drawPointIfMatchY(1, sb);
+
+        // then
+        assertThat(sb.toString()).isEqualTo("      ㆍ");
+    }
+
+    @Test
+    @DisplayName("y 좌표 같지 않아서 좌표 그림 추가 안됨")
+    void drawPointIfNotMatchY(){
+        // given
+        Point point1 = Point.from(2, 1);
+        StringBuilder sb = new StringBuilder();
+
+        // when
+        point1.drawPointIfMatchY(5, sb);
+
+        // then
+        assertThat(sb.isEmpty()).isTrue();
+    }
+
+    @Test
+    @DisplayName("다른 점과 y 좌표 같은 같으면서 인자로 넘어온 y 값과 같아 좌표 그림 추가")
+    void drawPointIfMatchY_matchOtherPoint(){
+        // given
+        Point point1 = Point.from(2, 1);
+        Point point2 = Point.from(3, 1);
+        StringBuilder sb = new StringBuilder();
+
+        // when
+        point1.drawPointIfMatchY(1, sb, point2);
+
+        // then
+        assertThat(sb.toString()).isEqualTo("   ㆍ");
+    }
+
+    @Test
+    @DisplayName("다른 점과 y 좌표 같은 같으면서 인자로 넘어온 y 값과 같지 않아 좌표 그림 추가 안됨")
+    void drawPointIfNotMatchY_matchOtherPoint(){
+        // given
+        Point point1 = Point.from(2, 1);
+        Point point2 = Point.from(3, 1);
+        StringBuilder sb = new StringBuilder();
+
+        // when
+        point1.drawPointIfMatchY(5, sb, point2);
+
+        // then
+        assertThat(sb.isEmpty()).isTrue();
+    }
+
+    @Test
+    @DisplayName("y 좌표 같아 true 반환")
+    void isEqualY_true(){
+        // given
+        Point point1 = Point.from(2, 10);
+
+        // when
+        boolean response = point1.isEqualY(10);
+
+        // then
+        assertThat(response).isTrue();
+    }
+
+    @Test
+    @DisplayName("y 좌표 같아 false 반환")
+    void isEqualY_false(){
+        // given
+        Point point1 = Point.from(2, 10);
+
+        // when
+        boolean response = point1.isEqualY(5);
+
+        // then
+        assertThat(response).isFalse();
+    }
+
+
 }

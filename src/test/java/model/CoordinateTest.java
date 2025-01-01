@@ -34,7 +34,7 @@ public class CoordinateTest {
     }
 
     @Test
-    @DisplayName("coordinate 값 뺄셈")
+    @DisplayName("좌표값 뺄셈")
     void minus(){
         // given
         Coordinate coordinate1 = new Coordinate(10);
@@ -46,5 +46,32 @@ public class CoordinateTest {
         // then
         assertThat(response).isEqualTo(5);
 
+    }
+
+    @Test
+    @DisplayName("그래프 좌표 위치 반환")
+    void getGraphPosition(){
+        // given
+        Coordinate coordinate1 = new Coordinate(10);
+
+        // when
+        int response = coordinate1.getGraphPosition();
+
+        // then
+        assertThat(response).isEqualTo(30);
+    }
+
+    @Test
+    @DisplayName("다른 점과 y값이 같은 경우 그래프 좌표 위치 반환")
+    void getGraphPositionDifference(){
+        // given
+        Coordinate coordinate1 = new Coordinate(10);
+        Coordinate coordinate2 = new Coordinate(7);
+
+        // when
+        int response = coordinate1.getGraphPositionDifference(coordinate2);
+
+        // then
+        assertThat(response).isEqualTo(9);
     }
 }

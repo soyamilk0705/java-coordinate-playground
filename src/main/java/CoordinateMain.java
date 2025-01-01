@@ -11,7 +11,7 @@ public class CoordinateMain {
         Calculator calculator = new Calculator(points);
         double result = calculator.distance();
 
-        ResultView resultView = new ResultView(result);
+        ResultView resultView = new ResultView(points, result);
         resultView.print();
     }
 }

@@ -35,6 +35,29 @@ public class Point {
         }
     }
 
+    public void drawPointIfMatchY(int yValue, StringBuilder sb){
+        if (isEqualY(yValue)){
+            sb.append(" ".repeat(x.getGraphPosition()))
+            .append("ㆍ");
+        }
+    }
+
+    public void drawPointIfMatchY(int yValue, StringBuilder sb, Point other){
+        if (isEqualY(yValue)){
+            sb.append(" ".repeat(x.getGraphPositionDifference(other.x)))
+            .append("ㆍ");
+        }
+    }
+
+    public boolean isEqualY(int yValue){
+        return y.equals(yValue);
+    }
+
+    public boolean isEqualY(Point other){
+        return y.equals(other.y);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,3 +72,4 @@ public class Point {
     }
 
 }
+

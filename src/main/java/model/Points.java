@@ -32,4 +32,16 @@ public class Points {
     public int hashCode() {
         return Objects.hash(point1, point2);
     }
+
+    public void drawPoints(int yValue, StringBuilder sb){
+        point1.drawPointIfMatchY(yValue, sb);
+
+        if (point1.isEqualY(point2)){
+            point2.drawPointIfMatchY(yValue, sb, point1);
+            return;
+        }
+
+        point2.drawPointIfMatchY(yValue, sb);
+
+    }
 }
