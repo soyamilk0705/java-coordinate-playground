@@ -1,7 +1,6 @@
 package io;
 
 import messages.ErrorMessages;
-import model.Coordinate;
 import model.Point;
 import model.Points;
 import org.junit.jupiter.api.DisplayName;
@@ -21,12 +20,12 @@ class CoordinateScannerTest {
             "(15,15)-(0,0)"
     })
     @DisplayName("입력 포맷 검증")
-    void isCorrectFormat(String input){
+    void checkMatchFormat(String input){
         // given
         CoordinateScanner scanner = new CoordinateScanner();
 
         // when, then
-        assertDoesNotThrow(() -> scanner.isCorrectFormat(input));
+        assertDoesNotThrow(() -> scanner.checkMatchFormat(input));
     }
 
     @ParameterizedTest
@@ -39,16 +38,60 @@ class CoordinateScannerTest {
             "(10,10)-14,15)"
     })
     @DisplayName("입력 포맷 검증 시 예외 발생")
-    void isInvalidCorrectFormat(String input){
+    void checkMatchFormat_exception(String input){
         // given
         CoordinateScanner scanner = new CoordinateScanner();
 
         // when
-        IllegalArgumentException fail = assertThrows(IllegalArgumentException.class, () -> scanner.isCorrectFormat(input));
+        IllegalArgumentException fail = assertThrows(IllegalArgumentException.class, () -> scanner.checkMatchFormat(input));
 
         // then
         assertThat(fail.getMessage()).isEqualTo(ErrorMessages.INVALID_FORMAT_INPUT);
     }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "(10,10)-(14,15)",
+            "(0,0)-(24,24)",
+            "(15,15)-(0,0)"
+    })
+    @DisplayName("입력 포맷 검증")
+    void isMatchFormat(String input){
+        // given
+        CoordinateScanner scanner = new CoordinateScanner();
+
+        // when
+        boolean response =  scanner.isMatchFormat(input);
+
+        // then
+        assertThat(response).isTrue();
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "(10,10-(14,15)",
+            "(00)-(24,24)",
+            "(15,)-(0,0)",
+            "(10,10)(14,15)",
+            "(10, 130)-(14,  15)",
+            "(10,10)-14,15)"
+    })
+    @DisplayName("입력 포맷 검증 시 예외 발생")
+    void isNotMatchFormat(String input){
+        // given
+        CoordinateScanner scanner = new CoordinateScanner();
+
+        // when
+        boolean response =  scanner.isMatchFormat(input);
+
+        // then
+        assertThat(response).isFalse();
+    }
+
+
+
 
     @Test
     @DisplayName("입력값 파싱 후 Points 객체 생성")

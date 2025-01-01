@@ -30,7 +30,7 @@ public class CoordinateScanner {
         Points points;
 
         try{
-            isCorrectFormat(input);
+            checkMatchFormat(input);
             points = parseNumber(input);
         } catch (IllegalArgumentException ex){
             System.out.println(ex.getMessage());
@@ -41,10 +41,14 @@ public class CoordinateScanner {
     }
 
 
-    public void isCorrectFormat(String input){
-        if(!input.matches("\\([0-9]{1,2},[0-9]{1,2}\\)-\\([0-9]{1,2},[0-9]{1,2}\\)")){
+    public void checkMatchFormat(String input){
+        if(!isMatchFormat(input)){
             throw new IllegalArgumentException(ErrorMessages.INVALID_FORMAT_INPUT);
         }
+    }
+
+    public boolean isMatchFormat(String input){
+        return input.matches("\\([0-9]{1,2},[0-9]{1,2}\\)-\\([0-9]{1,2},[0-9]{1,2}\\)");
     }
 
     public Points parseNumber(String input){
