@@ -6,15 +6,18 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FigureFactoryTest {
+
     @Test
     public void line() {
         List<Point> points = Arrays.asList(
                 Point.of(1, 2),
-                Point.of(2, 3));
+                Point.of(2, 3)
+        );
 
-        Figure figure = FigureFactory.getInstance(points);
+        Figure figure = new FigureFactory().create(points);
         assertThat(figure).isInstanceOfAny(Line.class);
         assertThat(figure.getName()).isEqualTo("선");
     }
@@ -24,9 +27,10 @@ public class FigureFactoryTest {
         List<Point> points = Arrays.asList(
                 Point.of(1, 1),
                 Point.of(4, 1),
-                Point.of(1, 4));
+                Point.of(1, 4)
+        );
 
-        Figure figure = FigureFactory.getInstance(points);
+        Figure figure = new FigureFactory().create(points);
         assertThat(figure).isInstanceOfAny(Triangle.class);
         assertThat(figure.getName()).isEqualTo("삼각형");
     }
@@ -37,10 +41,26 @@ public class FigureFactoryTest {
                 Point.of(1, 1),
                 Point.of(4, 1),
                 Point.of(1, 4),
-                Point.of(4, 4));
+                Point.of(4, 4)
+        );
 
-        Figure figure = FigureFactory.getInstance(points);
+        Figure figure = new FigureFactory().create(points);
         assertThat(figure).isInstanceOfAny(Rectangle.class);
         assertThat(figure.getName()).isEqualTo("사각형");
+    }
+
+    @Test
+    public void illegalArgumentException(){
+        List<Point> points = Arrays.asList(
+                Point.of(1, 1),
+                Point.of(4, 1),
+                Point.of(1, 4),
+                Point.of(4, 4),
+                Point.of(4, 22)
+        );
+
+        assertThatThrownBy(() -> new FigureFactory().create(points))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("유효하지 않은 도형입니다.");
     }
 }
